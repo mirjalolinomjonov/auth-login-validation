@@ -3,6 +3,23 @@ const submit = document.querySelector(".form .form__submit");
 const pinfl = document.querySelector(".form .pinfl");
 const infoIcon = document.querySelector(".form .info");
 
+function validPassportSeries(val) {
+  const letters = /^[A-Za-z]+$/;
+
+  if (
+    val.split("").slice(0, 2).join("").match(letters) &&
+    !isNaN(val.split("").slice(2).join(""))
+  ) {
+    console.log("it's ok");
+    return true;
+  } else {
+    console.log("failer");
+    return false;
+  }
+}
+
+validPassportSeries("sa1316515615");
+
 function isNumberKey(evt) {
   let charCode = evt.which ? evt.which : event.keyCode;
   if ((charCode > 31 && charCode < 48) || charCode > 57) {
@@ -48,6 +65,7 @@ const options = [
   },
 ];
 
+// create options
 options.reverse().forEach((item, index) => {
   let label = document.createElement("label");
   let input = document.createElement("input");
@@ -59,6 +77,7 @@ options.reverse().forEach((item, index) => {
   input.name = item.name;
   input.placeholder = item?.placeholder;
   input.maxLength = item.maxLength;
+  input.autocomplete = "off";
 
   label.appendChild(input);
 
@@ -70,6 +89,7 @@ options.reverse().forEach((item, index) => {
   form.prepend(label);
 });
 
+// set events
 const inputs = document.querySelectorAll(".form .form__input");
 inputs.forEach((input, index) => {
   input.addEventListener("input", (e) => {
@@ -96,21 +116,50 @@ inputs.forEach((input, index) => {
   });
 });
 
+// SUBMIT
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  inputs.forEach((input, index) => {
-    if (input.value == "" || input.value == undefined || input.value == null) {
-      input.classList.add("wrong");
-    } else {
-      input.classList.remove("wrong");
-    }
 
-    if (input.value.split(" ").join("").length < 14 && input.name === "pinfl") {
-      input.classList.add("wrong");
-    } else {
-      input.classList.remove("wrong");
+  inputs.forEach((input, index, arr) => {
+    // validation
+    if (input.name === "name") {
+      !input.value
+        ? input.classList.add("wrong")
+        : input.classList.remove("wrong");
+    } else if (input.name === "phone") {
+      !input.value || input.value.split(" ").join("").length < 11
+        ? input.classList.add("wrong")
+        : input.classList.remove("wrong");
+    } else if (input.name === "passport") {
+      !input.value ||
+      input.value.length < 9 ||
+      !validPassportSeries(input.value)
+        ? input.classList.add("wrong")
+        : input.classList.remove("wrong");
+    } else if (input.name === "pinfl") {
+      !input.value || input.value.split(" ").join("").length < 14
+        ? input.classList.add("wrong")
+        : input.classList.remove("wrong");
+    } else if (input.name === "birthday") {
+      !input.value
+        ? input.classList.add("wrong")
+        : input.classList.remove("wrong");
     }
   });
 });
 
+let pas = "qa1234567";
 
+function valTxt(val) {
+  const letters = /^[A-Za-z]+$/;
+
+  if (val.split("").slice(0, 2).join("").match(letters)) {
+    console.log("it's ok");
+    return true;
+  } else {
+    console.log("failer");
+    return false;
+  }
+}
+
+// console.log(isNaN(pas.split("").slice(2).join("")));
