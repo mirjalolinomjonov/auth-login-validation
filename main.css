@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: aliceblue;
+  font-family: sans-serif;
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form {
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+}
+
+.form .form__label{
+  position: relative;
+}
+.form .form__label .pinfl{
+  position: absolute;
+  top: 0;
+  left: 110%;
+  width: 400px;
+  transition:  all .35s linear;
+  transform: translateY(30px);
+  opacity: 0;
+  visibility: hidden;
+}
+.form .form__label .pinfl img{
+  width: 100%;
+  object-fit: cover;
+}
+.form .form__label .info{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.form .form__label .info:hover + .pinfl{
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.form .form__input {
+  outline: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.form .form__input:hover,
+.form__input:focus {
+  box-shadow: 0 0 5px 1px #ddd;
+}
+
+.form .form__input.wrong {
+  border-color: red;
+  animation: validation .1s 3;
+}
+
+@keyframes validation {
+  from {
+    transform: translateX(-5px);
+  }
+  to {
+    transform: translateX(5px);
+  }
+}
+
+.form .form__submit {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: steelblue;
+  transition: all 0.3s linear;
+}
+
+.form .form__submit:hover {
+  opacity: 0.7;
+}
+
+
