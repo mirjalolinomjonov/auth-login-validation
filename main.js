@@ -3,7 +3,7 @@ const submit = document.querySelector(".form .form__submit");
 const pinfl = document.querySelector(".form .pinfl");
 const infoIcon = document.querySelector(".form .info");
 
-function validPassportSeries(val) {
+function validPassportSerieNuber(val) {
   const letters = /^[A-Za-z]+$/;
 
   if (
@@ -17,8 +17,6 @@ function validPassportSeries(val) {
     return false;
   }
 }
-
-validPassportSeries("sa1316515615");
 
 function isNumberKey(evt) {
   let charCode = evt.which ? evt.which : event.keyCode;
@@ -133,7 +131,7 @@ submit.addEventListener("click", (e) => {
     } else if (input.name === "passport") {
       !input.value ||
       input.value.length < 9 ||
-      !validPassportSeries(input.value)
+      !validPassportSerieNuber(input.value)
         ? input.classList.add("wrong")
         : input.classList.remove("wrong");
     } else if (input.name === "pinfl") {
