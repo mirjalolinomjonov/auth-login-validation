@@ -68,7 +68,6 @@ submit.addEventListener("click", (e) => {
       input.classList.add("wrong");
     } else {
       input.classList.remove("wrong");
-      alert('Succsess')
     }
   });
 });
